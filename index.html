@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script   src="jquery_library.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>Art Gallery</title>
+<style type="text/css">
+	.thumb0 {
+		bottom: 10px;
+		height: 100px;
+		width: 100px;
+		border: 3px solid #000000; 
+	}
+	.thumb1 {
+		height: 100px;
+		width: 100px;
+		border: 3px solid #000000; 
+	}
+	.thumb2 {
+		height: 100px;
+		width: 100px;
+		border: 3px solid #000000; 
+	}
+	.thumb3 {
+		height: 100px;
+		width: 100px;
+		border: 3px solid #000000; 
+	}
+	.thumb4 {
+		height: 100px;
+		width: 100px;
+		border: 3px solid #000000; 
+	}
+	.container {
+		position: absolute;
+		z-index: 0;
+		right: 726px;
+		bottom: 37px;
+	}
+	.info {
+		position: relative;
+		top: -20px;
+		z-index: 13;
+		font-size: 18px;
+		color: #FFFFFF;
+		background-color: rgba(0, 0, 0, .5);
+		width: 40%;
+		left: 20px;
+		text-align: center;
+	}
+</style>
+</head>
+
+
+<body>
+
+<img id="mainImage" class= "mainImage" height="500" width="540" 
+	style="border: 3px solid #000000; position: absolute; z-index: 1" src="Art1.jpg">
+<br> 
+<div class="container">
+	<img class="thumb0" src="Art1.jpg" alt="image">
+	<img class="thumb1" src="temp.jpg" alt="image">
+	<img class="thumb2" src="temp.jpg" alt="image">
+	<img class="thumb3" src="temp.jpg" alt="image">
+	<img class="thumb4" src="temp.jpg" alt="image">
+</div>
+<h1 class="info" id="info"></h1>
+
+<script language="javascript">
+
+function Art_objects(Name, Price, small_image, large_image) {
+  this.Name = Name;
+  this.Price = Price;
+  this.small_image = small_image;
+  this.large_image = large_image;
+} 
+
+var art1 = new Art_objects("School of Athens by Raphael", 
+	"29.7 million", "Art1.jpg", "Art1.jpg");
+
+var art2 = new Art_objects ("Landscape with the Fall of Icarus by Pieter Bruegel the Elder", 
+	"23.5 million", "Art2.jpg", "Art2.jpg");
+
+var art3 = new Art_objects ("Nighthawks by Edward Hopper", 
+	"1.2 million", "Art3.jpg", "Art3.jpg");
+
+var art4 = new Art_objects ("Dogs Playing Poker by Cassius Marcellus Coolidge", 
+	"950 thousand", "Art4.jpg", "Art4.jpg");
+
+var art5 = new Art_objects ("The Persistence of Memory by Salvador Dali", 
+	"550 million", "Art5.jpg", "Art5.jpg");
+
+var artworks = [];
+artworks.push(art1); 
+artworks.push(art2); 
+artworks.push(art3); 
+artworks.push(art4); 
+artworks.push(art5); 
+
+
+$(document).ready(function(){
+	$.each(artworks, function(index, obj){
+		$(".thumb" + index).attr("src",obj.small_image);
+	});
+});
+
+
+$(".container img").hover(function(){
+   	var src = $(this).attr("src");
+   	$("#mainImage").attr("src",src);
+    $("#mainImage").hide();
+    $("#mainImage").fadeIn(200);
+    $(".info").hide();
+    if (src == "Art1.jpg") {
+		document.getElementById("info").innerHTML = art1.Name + "<br />" + art1.Price;
+	}
+	if (src == "Art2.jpg") {
+		document.getElementById("info").innerHTML = art2.Name + "<br />" + art2.Price;
+	}
+	if (src == "Art3.jpg") {
+		document.getElementById("info").innerHTML = art3.Name + "<br />" + art3.Price;
+	}
+	if (src == "Art4.jpg") {
+		document.getElementById("info").innerHTML = art4.Name + "<br />" + art4.Price;
+	}
+	if (src == "Art5.jpg") {
+		document.getElementById("info").innerHTML = art5.Name + "<br />" + art5.Price;
+	}
+});
+
+$(".container img").click(function(){
+	$(".info").show();
+	setTimeout(function() {
+        $(".info").fadeOut(200);
+    }, 5000);
+});
+
+</script> 
+</body>
+</html>
+
+
